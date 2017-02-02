@@ -13,5 +13,5 @@ setup(
     url='',
     license='See LICENSE',
     description='Demo program about Natural Language Processing.',
-    long_description=open('README').read(),
+    long_description=open('README.md').read(),
 )
