@@ -1,2 +1,2 @@
-# albatross
-Albatross is an demo program about Natural Language Processing.
+# NLP demo
+Demo program about Natural Language Processing.
