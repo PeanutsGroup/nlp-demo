@@ -90,4 +90,5 @@ ENV/
 
 # data & result
 data/
+work/
 result/
