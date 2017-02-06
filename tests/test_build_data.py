@@ -2,9 +2,9 @@
 #
 
 import unittest
-from nlpdemo.data_preparation.build_data import *
+from nlpdemo.build_data import *
 
-class TestStringMethods(unittest.TestCase):
+class TestBuildDataMethods(unittest.TestCase):
 
     def test_build_data_01(self):
         print('test retrieve_contents start...')
