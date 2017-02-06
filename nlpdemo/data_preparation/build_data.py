@@ -32,11 +32,11 @@ def machine_filter(infile, outfile, kwfile):
     kwdict = {}
     with open(kwfile, 'r') as kf:
         for w in kf:
-            print(w[2:], w[:1])
+            #print(w[2:].strip(), w[:1])
             kwdict[w[2:].strip()] = w[:1]
-    print(kwdict)
+    #print(kwdict)
     regstr = reduce(lambda r, w : r + '|' + w, kwdict.keys())
-    print(regstr)
+    #print(regstr)
     regex = re.compile(regstr)
 
     GOOD_CONTENT, BAD_CONTENT, SKIP_CONTENT = '1', '2', '3'
@@ -44,15 +44,15 @@ def machine_filter(infile, outfile, kwfile):
     with open(outfile, 'w') as rf:
         with open(infile, 'r') as df:
             for i, line in enumerate(df):
-                #if regex.match(line):
                 m = regex.search(line)
                 if m:
-                    rf.write(kwdict[m.group(0)] + '\n')
-                    print(kwdict[m.group(0)], m.group(0))
+                    rf.write(kwdict[m.group(0)] + ',' + line)
+                    #rf.write(kwdict[m.group(0)] + '\n')
+                    #print(kwdict[m.group(0)], m.group(0))
                     count += 1
                 else:
-                    #pass
-                    rf.write(SKIP_CONTENT + '\n')
+                    pass
+                    #rf.write(SKIP_CONTENT + '\n')
                     #print('3')
-    print('Matched %d lines.' % count) 
+    #print('Matched %d lines.' % count) 
 
