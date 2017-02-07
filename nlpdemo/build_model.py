@@ -6,21 +6,20 @@
 import MeCab
 import fasttext
 
-def content_wakati(infile, outfile):
+def content_wakati(infile, tdata):
     t = MeCab.Tagger("-Owakati")
-    with open(outfile, 'w') as rf:
+    with open(tdata + '.train', 'w') as nf, open(tdata + '.test', 'w') as tf:
         with open(infile, 'r') as df:
             for i, line in enumerate(df):
-                rf.write('__label__' + t.parse(line))
+                if i % 5 == 0:
+                    tf.write('__label__' + t.parse(line))
+                else:
+                    nf.write('__label__' + t.parse(line))
     return i
 
-def train_model(data, model):
-    classifier = fasttext.supervised(data, model)
-    return classifier
-
-def test_model(data, model):
-    classifier = fasttext.load_model(model + '.bin')
-    result = classifier.test(data)
+def train_model(tdata, model):
+    classifier = fasttext.supervised(tdata + '.train', model)
+    result = classifier.test(tdata + '.test')
     print('P@1:', result.precision)
     print('R@1:', result.recall)
     print('Number of examples:', result.nexamples)
